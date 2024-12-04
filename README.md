@@ -78,7 +78,7 @@ you will get an id in the response of the first endpoint and that id will be use
 ```
 { "id": "7fb1377b-b223-49d9-a31a-5a02701dd310" }
 ```
-An example of the request in postman is shown below:
+An example of the request in Postman is shown below:
 ![image](https://github.com/user-attachments/assets/c5b2c9ea-a6b6-44c1-a438-53ffe585f81d)
 
 - Endpoint 2 is a GET request that takes an id in the URI and will return back JSON with the number of points that the receipt is awarded. An example of the request URI is shown below:
