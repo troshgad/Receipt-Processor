@@ -6,7 +6,9 @@ import (
 	"strconv"
 	"strings"
 )
-
+/*Validates the request of the receipt
+if any part of the validation fails the request will fail
+*/
 func validate_request(receipt Receipt) bool {
 	if !validate_retailer(receipt.Retailer) {
 		fmt.Println("Failure to validate Retailer")
@@ -29,8 +31,6 @@ func validate_request(receipt Receipt) bool {
 		fmt.Println("Failure to validate items")
 		return false
 	}
-
-	fmt.Println("receipt is valid")
 	return true
 
 }
@@ -43,11 +43,12 @@ retailer:
 	pattern: "^[\\w\\s\\-&]+$"
 	example: "M&M Corner Market"
 */
+//Validates the retailer if the string doesnt match the pattern or if the retailer is emtpy
 func validate_retailer(retailer string) bool {
 	if retailer == "" {
 		return false
 	}
-
+	
 	m, err := regexp.MatchString("^[\\w\\s\\-&]+$", retailer)
 	if err != nil {
 		fmt.Println("faulty regex")
@@ -68,32 +69,27 @@ purchaseDate:
 	format: date
 	example: "2022-01-01"
 */
+//must fit the format of the date otherwise returns false
 func validate_purchaseDate(purchaseDate string) bool {
 	if purchaseDate == "" {
-		fmt.Println("Hit 0")
 		return false
 	}
 	var purchaseDateSplit = strings.Split(purchaseDate, "-")
+	//if the split string doesnt equal 3 then it must be missing something so fail
 	if len(purchaseDateSplit) != 3 {
-		fmt.Println("Hit 1")
 		return false
 	}
-
+	//if the string contains anything other than numbers after dashes are removed then fail
 	if !regexp.MustCompile(`\d`).MatchString(strings.Join(purchaseDateSplit, "")) {
-		fmt.Println("Hit 2")
 		return false
 	}
 	day, hourErr := strconv.ParseInt(purchaseDateSplit[2], 10, 16)
 	month, minuteErr := strconv.ParseInt(purchaseDateSplit[1], 10, 16)
 	if hourErr != nil || minuteErr != nil {
-		fmt.Println("Hit 3")
 		return false
 	}
-
+	//days cant be more than 31 or less than 0 and months cant be more than 12
 	if day > 31 || day < 0 || month < 0 || month > 12 || len(purchaseDateSplit[0]) != 4 || len(purchaseDateSplit[1]) != 2 || len(purchaseDateSplit[2]) != 2 {
-		fmt.Println(day)
-		fmt.Println(month)
-		fmt.Println("Hit 4")
 		return false
 	}
 
@@ -108,6 +104,7 @@ purchaseTime:
 	format: time
 	example: "13:01"
 */
+
 func validate_purchaseTime(purchaseTime string) bool {
 	if purchaseTime == "" {
 		return false
@@ -147,7 +144,6 @@ func validate_total(total string) bool {
 	if !regexp.MustCompile("^\\d+\\.\\d{2}$").MatchString(total) && total != "" {
 		return false
 	}
-
 	return true
 }
 
@@ -183,10 +179,11 @@ func validate_items(items []Item) bool {
 	}
 
 	for _, a := range items {
+		//loop through items and check to see if its null or if the string doesnt match the patterns 
 		if a.Price == "" || a.ShortDescription == "" {
 			return false
 		}
-
+		
 		if !regexp.MustCompile("^\\d+\\.\\d{2}$").MatchString(a.Price) || !regexp.MustCompile("^[\\w\\s\\-]+$").MatchString(a.ShortDescription) {
 			return false
 		}
