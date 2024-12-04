@@ -45,7 +45,7 @@ func main() {
 	r.HandleFunc("/receipts/process", ProcessHandler).Methods("POST")
 	r.HandleFunc("/receipts/{id}/points", PointsHandler).Methods("GET")
 	http.Handle("/", r)
-	http.ListenAndServe(":80", nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
