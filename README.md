@@ -1,3 +1,9 @@
+# Files of Note:
+
+- processor.go
+  - handles all the routes / processing of the requests
+- validation.go
+  - validates if the request body is a valid receipt 
 #  Prerequisites:
 
 - Have Docker installed on device
