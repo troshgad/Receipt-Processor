@@ -7,6 +7,7 @@
 #  Prerequisites:
 
 - Have Docker installed on device
+- Have Postman
 - Clone Repository
 
 ## Build image for Docker:
