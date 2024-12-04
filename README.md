@@ -22,7 +22,7 @@ docker run --publish  8080:8080  docker-gs-ping:multistage
 
 You should now be able to reach the app located at </a> http://localhost:8080 </a>
 
-#NOTES:
+## NOTES:
 
 The two endpoints are
 
