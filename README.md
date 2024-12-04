@@ -5,8 +5,8 @@
 
 ## Build image for Docker:
 
--Go to project directory that was cloned previously 
--Run command to build image
+- Go to project directory that was cloned previously 
+- Run command to build image
 
 ```
   docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
@@ -14,7 +14,7 @@
 
 ## Run Docker Container: 
 
--After building the image, use this commmand to run the image
+- After building the image, use this commmand to run the image
 
 ```
 docker run --publish  8080:8080  docker-gs-ping:multistage
